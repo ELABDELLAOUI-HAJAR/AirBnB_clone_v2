@@ -4,6 +4,7 @@
 from fabric.api import local, env, put, run
 from datetime import datetime
 from os import path
+from fabric.decorators import runs_once
 
 
 env.hosts = ['54.237.65.38', '54.237.210.238']
@@ -15,6 +16,7 @@ env.user = "ubuntu"
 env.key_filename = "~/.ssh/id_rsa"
 
 
+@runs_once
 def do_pack():
     """ generates a .tgz archive from the contents of
     the web_static folder of your AirBnB Clone repo
