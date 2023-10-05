@@ -44,7 +44,7 @@ def do_deploy(archive_path):
         file_no_ext, ext = path.splitext(filename)
         put(archive_path, "/tmp/{}".format(filename))
         run("rm -rf {}{}".format(dir_path, file_no_ext))
-        run("mkdir -p {}{}".format(dir_path, file_without_ext))
+        run("mkdir -p {}{}".format(dir_path, file_no_ext))
         run("tar -xzf /tmp/{} -C {}{}".format(filename, dir_path, file_no_ext))
         run("rm /tmp/{}".format(filename))
         run("mv {0}{1}/web_static/* {0}{1}/".format(dir_path, file_no_ext))
