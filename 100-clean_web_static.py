@@ -69,7 +69,7 @@ def deploy():
 def do_clean(number=0):
     """deletes out-of-date archives"""
     nbr = 2 if int(number) == 0 else int(number) + 1
- 
+
     with lcd("versions"):
         local("ls -dt * | tail -n +{} | sudo xargs rm -f".format(nbr))
     with cd("/data/web_static/releases"):
