@@ -79,7 +79,7 @@ def do_clean(number=0):
         list_versions.pop()
 
     with lcd("versions"):
-        [local("rm ./{}".format(ver) for ver in list_versions)]
+        [local("rm ./{}".format(ver)) for ver in list_versions]
 
     with cd("data/web_static/releases"):
         list_versions = run("ls -tr").split()
@@ -87,4 +87,4 @@ def do_clean(number=0):
         for _ in range(number):
             list_versions.pop()
 
-        [run("sudo rm -rf ./{}".format(ver) for ver in list_versions)]
+        [run("sudo rm -rf ./{}".format(ver)) for ver in list_versions]
