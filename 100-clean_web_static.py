@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ Fabric module for deploiement
 """
-from fabric.api import local, env, put, run
+from fabric.api import local, env, put, run, cd, lcd
 from datetime import datetime
 from os import path, listdir
 from fabric.decorators import runs_once
@@ -69,8 +69,8 @@ def deploy():
 def do_clean(number=0):
     """deletes out-of-date archives"""
     nbr = 2 if int(number) == 0 else int(number) + 1
-
-    local("ls -dt versions/* | tail -n +{} | sudo xargs rm -f".format(nbr))
-    remote_path = '/data/web_static/releases/*'
-    remote_cmd = "ls -dt {} | tail -n +{} | sudo xargs rm -rf"
-    run(remote_cmd.format(remote_path, nbr))
+ 
+    with lcd("versions"):
+        local("ls -dt * | tail -n +{} | sudo xargs rm -f".format(nbr))
+    with cd("/data/web_static/releases"):
+        run("ls -dt * | tail -n +{} | sudo xargs rm -rf".format(nbr))
