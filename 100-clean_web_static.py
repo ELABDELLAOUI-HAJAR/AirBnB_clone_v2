@@ -68,23 +68,9 @@ def deploy():
 
 def do_clean(number=0):
     """deletes out-of-date archives"""
-    if int(number) == 0:
-        number = 1
-    else:
-        number = int(number)
+    nbr = 2 if int(number) == 0 else int(number) + 1
 
-    list_versions = sorted(listdir("versions"))
-
-    for _ in range(number):
-        list_versions.pop()
-
-    with lcd("versions"):
-        [local("rm ./{}".format(ver)) for ver in list_versions]
-
-    with cd("data/web_static/releases"):
-        list_versions = run("ls -tr").split()
-        list_versions = [ar for ar in list_versions if "web_static_" in ar]
-        for _ in range(number):
-            list_versions.pop()
-
-        [run("sudo rm -rf ./{}".format(ver)) for ver in list_versions]
+    local("ls -dt versions/* | tail -n +{} | sudo xargs rm -f".format(nbr))
+    remote_path = '/data/web_static/releases/*'
+    remote_cmd = "ls -dt {} | tail -n +{} | sudo xargs rm -rf"
+    run(remote_cmd.format(remote_path, nbr))
