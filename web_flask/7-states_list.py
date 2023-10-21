@@ -19,7 +19,7 @@ def display_state():
 
 
 @app.teardown_appcontext
-def teardown(self):
+def teardown(excep):
     """Call Storage.close method"""
     storage.close()
 
