@@ -16,6 +16,9 @@
 
 	line-height: 20px;
 	border-right: 1px solid #DDDDDD;
+	
+	position: relative;
+	z-index: 1;
 }
 
 .amenities {
@@ -26,9 +29,14 @@
     width: 25%;
 
 	line-height: 20px;
+
+	position: relative;
+	z-index: 1;
 }
 
 .popover {
+	position: absolute;
+
 	list-style-type: none;
 	display: none;
 	background-color: #FAFAFA;
@@ -43,23 +51,21 @@
 
 	max-height: 300px;
 	overflow-y: auto;
+
 }
 
 .locations:hover .popover {
-	display: inline-block;
+	display: /*inline-*/block;
 }
 
 .amenities:hover .popover {
-	display: inline-block;
+	display: /*inline-*/block;
 }
 
 ul {
 	list-style-type: none;
 	padding: 0px;
 	padding-bottom: 20px;
-}
-
-li {
 }	
 
 h2 {
@@ -82,6 +88,13 @@ h4 {
 	margin-bottom: 5px;
 	padding-left: 45px;
 }
+
+/*.locations .popover li ul li h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}*/
 
 button {
 	color: #FFFFFF;
